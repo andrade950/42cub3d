@@ -197,7 +197,7 @@ norminette src include
 
 ---
 
-## Autores
+## Authors
 
 - [**andrade950**](https://github.com/andrade950)
 - [**g0nca**](https://github.com/g0nca)
