@@ -4,7 +4,7 @@
 
 ## Descrição
 
-**cub3D** é um projeto gráfico 3D inspirado no lendário **Wolfenstein 3D**, o primeiro First Person Shooter (FPS) da história. Utilizando a técnica de **raycasting**, este projeto renderiza um labirinto 3D realista a partir de uma perspetiva de primeira pessoa baseada num mapa 2D.
+**cub3D** é um projeto gráfico 3D inspirado no lendário **Wolfenstein 3D**, o primeiro First Person Shooter (FPS) da história. Usando a técnica de **raycasting**, este projeto renderiza um labirinto 3D realista a partir de uma perspetiva em primeira pessoa baseado num mapa 2D.
 
 O objetivo é explorar os fundamentos de computação gráfica, compreender algoritmos de raycasting e criar um ambiente 3D interativo usando a biblioteca **MiniLibX** em C.
 
@@ -13,8 +13,8 @@ O objetivo é explorar os fundamentos de computação gráfica, compreender algo
 - **Renderização 3D** usando princípios de raycasting
 - **Mapeamento de texturas** para paredes (Norte, Sul, Este, Oeste)
 - **Cores personalizáveis** para chão e teto
-- **Movimento do jogador** e rotação da câmera
-- **Parsing e validação de mapas** a partir de ficheiros `.cub`
+- **Movimento do jogador** e rotação da câmara
+- **Análise e validação de mapas** a partir de ficheiros `.cub`
 - **Gestão suave de janelas** e tratamento de eventos
 
 ---
@@ -43,10 +43,10 @@ make
 # Executar o jogo com um mapa
 ./cub3D maps/example.cub
 
-# Compilar com funcionalidades bonus
+# Compilar com funcionalidades bónus
 make bonus
 
-# Executar a versão bonus
+# Executar a versão bónus
 ./cub3D maps_bonus/example_bonus.cub
 ```
 
@@ -54,14 +54,14 @@ make bonus
 
 | Tecla | Ação |
 |-------|------|
-| **W** | Mover para a frente |
+| **W** | Mover para frente |
 | **A** | Mover para a esquerda |
 | **S** | Mover para trás |
 | **D** | Mover para a direita |
-| **Seta Esquerda** | Rodar câmera para a esquerda |
-| **Seta Direita** | Rodar câmera para a direita |
+| **Seta Esquerda** | Rodar câmara para a esquerda |
+| **Seta Direita** | Rodar câmara para a direita |
 | **ESC** | Sair do jogo |
-| **Rato** (bonus) | Rodar câmera |
+| **Rato** (bónus) | Rodar câmara |
 
 ---
 
@@ -73,17 +73,17 @@ make bonus
 
 *Raycasting clássico com paredes texturizadas, cores de chão/teto e movimento suave.*
 
-### Versão Bonus
+### Versão Bónus
 
-![Demo Versão Bonus](assets/demo_bonus.gif)
+![Demo Versão Bónus](assets/demo_bonus.gif)
 
-*Melhorada com colisões de paredes, minimapa, sprites animados, portas e rotação com rato.*
+*Melhorado com colisões de parede, minimapa, sprites animados, portas e rotação com rato.*
 
 ---
 
-## Funcionalidades Bonus
+## Funcionalidades Bónus
 
-Todas as funcionalidades bonus foram implementadas:
+Todas as funcionalidades bónus foram implementadas:
 
 - ✅ **Colisões com paredes**
 - ✅ **Sistema de minimapa**
@@ -91,27 +91,43 @@ Todas as funcionalidades bonus foram implementadas:
 - ✅ **Sprites animados**
 - ✅ **Rotação com rato**
 
----
+### Sistema de Colocação de Inimigos
 
-## Assets
+O algoritmo de colocação de inimigos analisa a estrutura do mapa para determinar localizações válidas de spawn:
 
-Exemplos de texturas e sprites usados no projeto:
+- **Spawn Dinâmico**: O sistema conta todos os espaços transitáveis (representados por `0`) no mapa
+- **Distribuição Proporcional**: Os inimigos são colocados aleatoriamente com base no número total de espaços transitáveis
+- **Posicionamento Aleatório**: Cada inimigo é atribuído a uma posição válida aleatória para garantir experiências de jogo variadas
 
-<div align="center">
+Esta abordagem garante que mapas maiores têm mais inimigos, mantendo a dificuldade equilibrada em diferentes tamanhos de mapa.
 
-| Parede Norte | Parede Sul | Parede Este | Parede Oeste |
-|--------------|------------|-------------|--------------|
-| ![Norte](assets/textures/north.png) | ![Sul](assets/textures/south.png) | ![Este](assets/textures/east.png) | ![Oeste](assets/textures/west.png) |
+### Sistema de Colocação de Portas
 
-| Porta Fechada | Porta Aberta | Sprite Animado |
-|---------------|--------------|----------------|
-| ![Porta Fechada](assets/textures/door_closed.png) | ![Porta Aberta](assets/textures/door_open.png) | ![Sprite](assets/textures/sprite_anim.gif) |
+As portas são estrategicamente colocadas usando um algoritmo sofisticado de validação:
 
-</div>
+- **Colocação Baseada em Paredes**: As portas só podem substituir blocos de parede (representados por `1`)
+- **Validação de Adjacência**: O sistema previne que duas portas sejam colocadas uma ao lado da outra
+- **Verificação de Acessibilidade**: Cada porta deve ter uma configuração válida onde conecta espaços transitáveis
+
+Configurações válidas de portas devem seguir este padrão:
+```
+1 0 1
+1 P 1
+1 0 1
+```
+ou
+```
+1 1 1
+0 P 0
+1 1 1
+```
+
+Onde `P` representa a porta, `1` representa paredes e `0` representa espaço transitável. Isto garante que todas as portas são acessíveis e servem um propósito funcional no layout do labirinto.
 
 ---
 
 ## Estrutura do Projeto
+
 Versão Base (Parte Obrigatória)
 ```
 cub3d/
@@ -128,18 +144,18 @@ cub3d/
 ├── libs/                 # Biblioteca MiniLibX
 │
 ├── src/                  # Ficheiros fonte (.c)
-│   ├── events/           # Gestão de teclas e movimento do jogador
+│   ├── events/           # Tratamento de teclas e movimento do jogador
 │   ├── init/             # Inicialização do jogo e texturas
-│   ├── parse/            # Lógica de parsing e validação de mapas
+│   ├── parse/            # Lógica de análise e validação de mapas
 │   ├── render/           # Motor de raycasting e desenho de paredes
-│   ├── utils/            # Funções auxiliares e gestão de erros
+│   ├── utils/            # Funções auxiliares e tratamento de erros
 │   └── main.c            # Ponto de entrada do programa
 │
 ├── Makefile
 └── README.md
 ```
 
-Versão Bonus
+Versão Bónus
 ```
 cub3d/
 ├── assets/               # Texturas e mapas
@@ -150,16 +166,16 @@ cub3d/
 │
 ├── libs/                 # Biblioteca MiniLibX
 │
-├── src_bonus/            # Ficheiros fonte bonus (.c)
-│   ├── door_system/      # Inicialização de portas, colocação e lógica de interação
+├── src_bonus/            # Ficheiros fonte bónus (.c)
+│   ├── door_system/      # Inicialização, colocação e lógica de interação de portas
 │   ├── enemy_system/     # Lógica de IA, colisão, linha de visão e renderização de inimigos
-│   ├── events/           # Inputs (Rato/Teclado), movimento e animações de arma
+│   ├── events/           # Inputs (Rato/Teclado), movimento e animações de armas
 │   ├── init/             # Estado do jogo e carregamento de texturas
 │   ├── parse/            # Validação profunda de ficheiros .cub e layouts de mapas
-│   ├── render/           # Motor de raycasting, paredes, minimapa e renderização de arma
-│   ├── utils/            # Gestão de memória (free), cores e manipulação de pixeis
+│   ├── render/           # Motor de raycasting, paredes, minimapa e renderização de armas
+│   ├── utils/            # Gestão de memória (free), cores e manipulação de pixels
 │   ├── main.c            # Loop principal do programa
-│   └── main_aux.c        # Funções auxiliares do main
+│   └── main_aux.c        # Funções auxiliares principais
 │
 ├── Makefile
 └── README.md
