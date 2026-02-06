@@ -171,7 +171,7 @@ norminette src include
 
 ## Autores
 
-- **bsantos-** - [Perfil 42](https://profile.intra.42.fr/users/bsantos-)
-- **jsobreir** - [Perfil 42](https://profile.intra.42.fr/users/jsobreir)
+- [**andrade950-**](https://github.com/andrade950)
+- [**g0nca**](https://github.com/g0nca)
 
 ---
