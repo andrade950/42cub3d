@@ -91,23 +91,38 @@ All bonus features have been implemented:
 - ✅ **Animated sprites**
 - ✅ **Mouse rotation**
 
----
+### Enemy Placement System
 
-## Assets
+The enemy placement algorithm analyzes the map structure to determine valid spawn locations:
 
-Sample textures and sprites used in the project:
+- **Dynamic Spawning**: The system counts all walkable spaces (represented by `0`) in the map
+- **Proportional Distribution**: Enemies are randomly placed based on the total number of walkable tiles
+- **Random Positioning**: Each enemy is assigned to a random valid position to ensure varied gameplay experiences
 
-<div align="center">
+This approach ensures that larger maps have more enemies while maintaining balanced difficulty across different map sizes.
 
-| North Wall | South Wall | East Wall | West Wall |
-|------------|------------|-----------|-----------|
-| ![North](assets/textures/north.png) | ![South](assets/textures/south.png) | ![East](assets/textures/east.png) | ![West](assets/textures/west.png) |
+### Door Placement System
 
-| Door Closed | Door Open | Animated Sprite |
-|-------------|-----------|-----------------|
-| ![Door Closed](assets/textures/door_closed.png) | ![Door Open](assets/textures/door_open.png) | ![Sprite](assets/textures/sprite_anim.gif) |
+Doors are strategically placed using a sophisticated validation algorithm:
 
-</div>
+- **Wall-Based Placement**: Doors can only replace wall tiles (represented by `1`)
+- **Adjacency Validation**: The system prevents two doors from being placed next to each other
+- **Accessibility Check**: Each door must have a valid configuration where it connects walkable spaces
+
+Valid door configurations must follow this pattern:
+```
+1 0 1
+1 D 1
+1 0 1
+```
+or
+```
+1 1 1
+0 D 0
+1 1 1
+```
+
+Where `D` represents the door, `1` represents walls, and `0` represents walkable space. This ensures that all doors are accessible and serve a functional purpose in the maze layout.
 
 ---
 
