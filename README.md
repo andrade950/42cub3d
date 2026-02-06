@@ -112,27 +112,55 @@ Sample textures and sprites used in the project:
 ---
 
 ## Project Structure
+
+Base Version (Mandatory Part)
 ```
 cub3d/
-├── include/              # Header files
+├── assets/               # Textures and maps
+│   ├── textures/
+│   └── maps/
+│
+├── include/              # Header files (.h)
 │   ├── cub3d.h
 │   ├── render.h
 │   ├── map.h
 │   └── raycast.h
 │
-├── src/                  # Source files
-│   ├── main.c
-│   ├── init/             # Initialization
-│   ├── render/           # Raycasting and rendering
-│   ├── events/           # Keyboard/mouse handling
-│   ├── map/              # Map parsing and validation
-│   └── utils/            # Utility functions
+├── libs/                 # MiniLibX library
 │
+├── src/                  # Source files (.c)
+│   ├── events/           # Key handling and player movement
+│   ├── init/             # Game and texture initialization
+│   ├── parse/            # Map parsing and validation logic
+│   ├── render/           # Raycasting engine and wall drawing
+│   ├── utils/            # Helper functions and error handling
+│   └── main.c            # Program entry point
+│
+├── Makefile
+└── README.md
+```
+
+Bonus Version
+```
+cub3d/
 ├── assets/               # Textures and maps
 │   ├── textures/
 │   └── maps/
 │
+├── include/              # Header files (.h)
+│
 ├── libs/                 # MiniLibX library
+│
+├── src_bonus/            # Bonus source files (.c)
+│   ├── door_system/      # Door initialization, placement, and interaction logic
+│   ├── enemy_system/     # AI logic, collision, line of sight, and enemy rendering
+│   ├── events/           # Inputs (Mouse/Keyboard), movement, and weapon animations
+│   ├── init/             # Game state and texture loading
+│   ├── parse/            # Deep validation of .cub files and map layouts
+│   ├── render/           # Raycasting engine, walls, minimap, and weapon rendering
+│   ├── utils/            # Memory management (free), colors, and pixel manipulation
+│   ├── main.c            # Main program loop
+│   └── main_aux.c        # Auxiliary main functions
 │
 ├── Makefile
 └── README.md
