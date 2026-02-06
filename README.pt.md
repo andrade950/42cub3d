@@ -112,27 +112,54 @@ Exemplos de texturas e sprites usados no projeto:
 ---
 
 ## Estrutura do Projeto
+Versão Base (Parte Obrigatória)
 ```
 cub3d/
-├── include/              # Ficheiros de cabeçalho
+├── assets/               # Texturas e mapas
+│   ├── textures/
+│   └── maps/
+│
+├── include/              # Ficheiros de cabeçalho (.h)
 │   ├── cub3d.h
 │   ├── render.h
 │   ├── map.h
 │   └── raycast.h
 │
-├── src/                  # Ficheiros fonte
-│   ├── main.c
-│   ├── init/             # Inicialização
-│   ├── render/           # Raycasting e renderização
-│   ├── events/           # Gestão de teclado/rato
-│   ├── map/              # Parsing e validação de mapas
-│   └── utils/            # Funções utilitárias
+├── libs/                 # Biblioteca MiniLibX
 │
+├── src/                  # Ficheiros fonte (.c)
+│   ├── events/           # Gestão de teclas e movimento do jogador
+│   ├── init/             # Inicialização do jogo e texturas
+│   ├── parse/            # Lógica de parsing e validação de mapas
+│   ├── render/           # Motor de raycasting e desenho de paredes
+│   ├── utils/            # Funções auxiliares e gestão de erros
+│   └── main.c            # Ponto de entrada do programa
+│
+├── Makefile
+└── README.md
+```
+
+Versão Bonus
+```
+cub3d/
 ├── assets/               # Texturas e mapas
 │   ├── textures/
 │   └── maps/
 │
+├── include/              # Ficheiros de cabeçalho (.h)
+│
 ├── libs/                 # Biblioteca MiniLibX
+│
+├── src_bonus/            # Ficheiros fonte bonus (.c)
+│   ├── door_system/      # Inicialização de portas, colocação e lógica de interação
+│   ├── enemy_system/     # Lógica de IA, colisão, linha de visão e renderização de inimigos
+│   ├── events/           # Inputs (Rato/Teclado), movimento e animações de arma
+│   ├── init/             # Estado do jogo e carregamento de texturas
+│   ├── parse/            # Validação profunda de ficheiros .cub e layouts de mapas
+│   ├── render/           # Motor de raycasting, paredes, minimapa e renderização de arma
+│   ├── utils/            # Gestão de memória (free), cores e manipulação de pixeis
+│   ├── main.c            # Loop principal do programa
+│   └── main_aux.c        # Funções auxiliares do main
 │
 ├── Makefile
 └── README.md
