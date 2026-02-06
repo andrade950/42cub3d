@@ -168,10 +168,3 @@ norminette src include
 ```
 
 ---
-
-## Authors
-
-- **bsantos-** - [42 Profile](https://profile.intra.42.fr/users/bsantos-)
-- **jsobreir** - [42 Profile](https://profile.intra.42.fr/users/jsobreir)
-
----
