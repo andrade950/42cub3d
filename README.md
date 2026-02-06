@@ -2,8 +2,6 @@
 
 [Leia em Português](README.pt.md)
 
-*This project has been created as part of the 42 curriculum by bsantos- and jsobreir.*
-
 ## Description
 
 **cub3D** is a 3D graphical project inspired by the legendary **Wolfenstein 3D**, the first-ever First Person Shooter (FPS). Using the **raycasting** technique, this project renders a realistic 3D maze from a first-person perspective based on a 2D map.
@@ -30,7 +28,7 @@ Before compiling the project, you need to install the **MiniLibX** library:
 # Clone the MiniLibX repository
 git clone https://github.com/42Paris/minilibx-linux.git minilibx-linux
 
-# Move it to the libs folder
+# Move it to the main folder
 mv minilibx-linux 42cub3d/
 ```
 
