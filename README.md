@@ -62,6 +62,8 @@ make bonus
 | **Right Arrow** | Rotate camera right |
 | **ESC** | Exit game |
 | **Mouse** (bonus) | Rotate camera |
+| **E** (bonus) | Open/Close door |
+| **Space** (bonus) | Shoot weapon |
 
 ---
 
