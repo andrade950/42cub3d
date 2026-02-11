@@ -62,6 +62,8 @@ make bonus
 | **Seta Direita** | Rodar câmara para a direita |
 | **ESC** | Sair do jogo |
 | **Rato** (bónus) | Rodar câmara |
+| **E** (bónus) | Abrir/Fechar porte |
+| **Espaço** (bónus) | Disparar arma |
 
 ---
 
