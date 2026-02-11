@@ -138,8 +138,8 @@ cub3d/
 │   └── cub3d.h
 │
 ├── libs/                 # Libraries used
-|   ├── get_next_line
-│   └── libft
+|   ├── get_next_line/
+│   └── libft/
 │
 ├── maps/                 # Maps
 |
@@ -169,8 +169,8 @@ cub3d/
 │   └── cub3d_bonus.h
 │
 ├── libs/                 # Libraries used
-|   ├── get_next_line
-│   └── libft
+|   ├── get_next_line/
+│   └── libft/
 │
 ├── maps/                 # Maps
 |
