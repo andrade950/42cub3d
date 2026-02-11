@@ -131,18 +131,20 @@ Where `D` represents the door, `1` represents walls, and `0` represents walkable
 Base Version (Mandatory Part)
 ```
 cub3d/
-├── assets/               # Textures and maps
-│   ├── textures/
-│   └── maps/
+├── assets/               # Textures
+│   └── textures/
 │
-├── include/              # Header files (.h)
-│   ├── cub3d.h
-│   ├── render.h
-│   ├── map.h
-│   └── raycast.h
+├── include/              # Header file (.h)
+│   └── cub3d.h
 │
 ├── libs/                 # MiniLibX library
+|   ├── get_next_line
+│   └── libft
 │
+├── maps/                 # Maps
+|
+├── minilibx-linux/       # MiniLibX library
+|
 ├── src/                  # Source files (.c)
 │   ├── events/           # Key handling and player movement
 │   ├── init/             # Game and texture initialization
@@ -151,20 +153,28 @@ cub3d/
 │   ├── utils/            # Helper functions and error handling
 │   └── main.c            # Program entry point
 │
-├── Makefile
-└── README.md
+└── Makefile
 ```
 
 Bonus Version
 ```
 cub3d/
-├── assets/               # Textures and maps
-│   ├── textures/
-│   └── maps/
+├── assets/               # Textures
+│   ├── door_textures/
+│   ├── enemies/
+│   ├── gun_textures/
+│   └── textures/
 │
-├── include/              # Header files (.h)
+├── include/              # Header file (.h)
+│   └── cub3d_bonus.h
 │
 ├── libs/                 # MiniLibX library
+|   ├── get_next_line
+│   └── libft
+│
+├── maps/                 # Maps
+|
+├── minilibx-linux/       # MiniLibX library
 │
 ├── src_bonus/            # Bonus source files (.c)
 │   ├── door_system/      # Door initialization, placement, and interaction logic
@@ -177,8 +187,7 @@ cub3d/
 │   ├── main.c            # Main program loop
 │   └── main_aux.c        # Auxiliary main functions
 │
-├── Makefile
-└── README.md
+└── Makefile
 ```
 
 ---
