@@ -131,54 +131,63 @@ Onde `P` representa a porta, `1` representa paredes e `0` representa espaço tra
 Versão Base (Parte Obrigatória)
 ```
 cub3d/
-├── assets/               # Texturas e mapas
-│   ├── textures/
-│   └── maps/
+├── assets/               # Texturas
+│   └── textures/
 │
-├── include/              # Ficheiros de cabeçalho (.h)
-│   ├── cub3d.h
-│   ├── render.h
-│   ├── map.h
-│   └── raycast.h
+├── include/              # Ficheiro de cabeçalho (.h)
+│   └── cub3d.h
 │
-├── libs/                 # Biblioteca MiniLibX
+├── libs/                 # Bibliotecas utilizadas
+|   ├── get_next_line
+│   └── libft
 │
+├── maps/                 # Mapas
+|
+├── minilibx-linux/       # Biblioteca MiniLibX
+|
 ├── src/                  # Ficheiros fonte (.c)
-│   ├── events/           # Tratamento de teclas e movimento do jogador
+│   ├── events/           # Gestão de teclas e movimento do jogador
 │   ├── init/             # Inicialização do jogo e texturas
-│   ├── parse/            # Lógica de análise e validação de mapas
+│   ├── parse/            # Análise e validação do mapa
 │   ├── render/           # Motor de raycasting e desenho de paredes
-│   ├── utils/            # Funções auxiliares e tratamento de erros
+│   ├── utils/            # Funções auxiliares e gestão de erros
 │   └── main.c            # Ponto de entrada do programa
 │
-├── Makefile
-└── README.md
+└── Makefile
 ```
 
 Versão Bónus
 ```
 cub3d/
-├── assets/               # Texturas e mapas
-│   ├── textures/
-│   └── maps/
+├── assets/               # Texturas
+│   ├── door_textures/
+│   ├── enemies/
+│   ├── gun_textures/
+│   └── textures/
 │
-├── include/              # Ficheiros de cabeçalho (.h)
+├── include/              # Ficheiro de cabeçalho (.h)
+│   └── cub3d_bonus.h
 │
-├── libs/                 # Biblioteca MiniLibX
+├── libs/                 # Bibliotecas utilizadas
+|   ├── get_next_line
+│   └── libft
 │
-├── src_bonus/            # Ficheiros fonte bónus (.c)
-│   ├── door_system/      # Inicialização, colocação e lógica de interação de portas
-│   ├── enemy_system/     # Lógica de IA, colisão, linha de visão e renderização de inimigos
-│   ├── events/           # Inputs (Rato/Teclado), movimento e animações de armas
+├── maps/                 # Mapas
+|
+├── minilibx-linux/       # Biblioteca MiniLibX
+│
+├── src_bonus/            # Ficheiros fonte do bónus (.c)
+│   ├── door_system/      # Inicialização, posicionamento e lógica de interação das portas
+│   ├── enemy_system/     # IA, colisão, linha de visão e renderização de inimigos
+│   ├── events/           # Entradas (Rato/Teclado), movimento e animações de armas
 │   ├── init/             # Estado do jogo e carregamento de texturas
 │   ├── parse/            # Validação profunda de ficheiros .cub e layouts de mapas
 │   ├── render/           # Motor de raycasting, paredes, minimapa e renderização de armas
-│   ├── utils/            # Gestão de memória (free), cores e manipulação de pixels
-│   ├── main.c            # Loop principal do programa
-│   └── main_aux.c        # Funções auxiliares principais
+│   ├── utils/            # Gestão de memória (free), cores e manipulação de píxeis
+│   ├── main.c            # Ciclo principal do programa
+│   └── main_aux.c        # Funções auxiliares do main
 │
-├── Makefile
-└── README.md
+└── Makefile
 ```
 
 ---
