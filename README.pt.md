@@ -69,7 +69,7 @@ make bonus
 
 ### Versão Base (Parte Obrigatória)
 
-![Demo Versão Base](assets/demo_base.gif)
+![Image](https://github.com/user-attachments/assets/458f38c8-28ba-4d6c-9c3e-b4c967e8ac99)
 
 *Raycasting clássico com paredes texturizadas, cores de chão/teto e movimento suave.*
 
