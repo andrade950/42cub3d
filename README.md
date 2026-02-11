@@ -137,7 +137,7 @@ cub3d/
 ├── include/              # Header file (.h)
 │   └── cub3d.h
 │
-├── libs/                 # MiniLibX library
+├── libs/                 # Libraries used
 |   ├── get_next_line
 │   └── libft
 │
@@ -168,7 +168,7 @@ cub3d/
 ├── include/              # Header file (.h)
 │   └── cub3d_bonus.h
 │
-├── libs/                 # MiniLibX library
+├── libs/                 # Libraries used
 |   ├── get_next_line
 │   └── libft
 │
