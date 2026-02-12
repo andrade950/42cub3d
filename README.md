@@ -77,7 +77,7 @@ make bonus
 
 ### Bonus Version
 
-![Bonus Version Demo](assets/demo_bonus.gif)
+![Image](https://github.com/user-attachments/assets/e24f80b1-c9ee-4f0d-aa48-575c04700e3b)
 
 *Enhanced with wall collisions, minimap, animated sprites, doors, and mouse rotation.*
 
