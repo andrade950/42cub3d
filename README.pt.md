@@ -77,7 +77,7 @@ make bonus
 
 ### Versão Bónus
 
-![Demo Versão Bónus](assets/demo_bonus.gif)
+![Image](https://github.com/user-attachments/assets/e24f80b1-c9ee-4f0d-aa48-575c04700e3b)
 
 *Melhorado com colisões de parede, minimapa, sprites animados, portas e rotação com rato.*
 
