@@ -1,231 +1,190 @@
-# cub3D
+<div align="center">
+
+# 🎮 cub3D
+
+**A Wolfenstein-inspired raycasting engine written in C**
+
+[![Language](https://img.shields.io/badge/Language-C-blue.svg)](https://en.wikipedia.org/wiki/C_(programming_language))
+[![Graphics](https://img.shields.io/badge/Graphics-MiniLibX-orange.svg)](#installation)
+[![Technique](https://img.shields.io/badge/Rendering-Raycasting-red.svg)](#how-it-works)
+[![Norm](https://img.shields.io/badge/42-Norminette-brightgreen.svg)](#)
 
 [Leia em Português](README.pt.md)
 
-## Description
+*Built by [andrade950](https://github.com/andrade950) & [g0nca](https://github.com/g0nca)*
 
-**cub3D** is a 3D graphical project inspired by the legendary **Wolfenstein 3D**, the first-ever First Person Shooter (FPS). Using the **raycasting** technique, this project renders a realistic 3D maze from a first-person perspective based on a 2D map.
-
-The goal is to explore the fundamentals of computer graphics, understand raycasting algorithms, and create an interactive 3D environment using the **MiniLibX** library in C.
-
-### Key Features
-
-- **3D rendering** using raycasting principles
-- **Texture mapping** for walls (North, South, East, West)
-- **Customizable floor and ceiling colors**
-- **Player movement** and camera rotation
-- **Map parsing and validation** from `.cub` files
-- **Smooth window management** and event handling
+</div>
 
 ---
 
-## Instructions
+## 📌 Overview
 
-### Prerequisites
+`cub3D` renders a navigable 3D maze from a first-person perspective using the **raycasting** technique — the same foundational method behind Wolfenstein 3D (1992). A 2D grid map is cast into a textured 3D world entirely in real time, using only the **MiniLibX** library in C.
 
-Before compiling the project, you need to install the **MiniLibX** library:
-```bash
-# Clone the MiniLibX repository
-git clone https://github.com/42Paris/minilibx-linux.git minilibx-linux
+---
 
-# Move it to the main folder
-mv minilibx-linux 42cub3d/
-```
+## 🎬 Demonstration
 
-### Compilation
-```bash
-# Navigate to the project folder
-cd 42cub3d
+### Base version
+![Base version](https://github.com/user-attachments/assets/458f38c8-28ba-4d6c-9c3e-b4c967e8ac99)
 
-# Compile the base game
-make
+### Bonus version
+![Bonus version](https://github.com/user-attachments/assets/e24f80b1-c9ee-4f0d-aa48-575c04700e3b)
 
-# Run the game with a map
-./cub3D maps/example.cub
+---
 
-# Compile with bonus features
-make bonus
+## ⚙️ Features
 
-# Run the bonus version
-./cub3D maps_bonus/example_bonus.cub
-```
+### Base
+- Raycasting 3D renderer
+- Textured walls — North, South, East, West faces
+- Configurable floor and ceiling colors
+- Player movement and camera rotation
+- Map parsing and validation from `.cub` files
 
-### Controls
+### Bonus
+- ✅ Wall collisions
+- ✅ Minimap
+- ✅ Animated sprites
+- ✅ Doors (open and close with **E**)
+- ✅ Mouse camera rotation
+- ✅ Weapon with shoot animation (**Space**)
+- ✅ Enemy system with dynamic spawning
+
+---
+
+## 🕹️ Controls
 
 | Key | Action |
 |-----|--------|
-| **W** | Move forward |
-| **A** | Move left |
-| **S** | Move backward |
-| **D** | Move right |
-| **Left Arrow** | Rotate camera left |
-| **Right Arrow** | Rotate camera right |
-| **ESC** | Exit game |
-| **Mouse** (bonus) | Rotate camera |
-| **E** (bonus) | Open/Close door |
-| **Space** (bonus) | Shoot weapon |
+| `W` `A` `S` `D` | Move |
+| `←` `→` | Rotate camera |
+| `Mouse` *(bonus)* | Rotate camera |
+| `E` *(bonus)* | Open / Close door |
+| `Space` *(bonus)* | Shoot |
+| `ESC` | Quit |
 
 ---
 
-## Demonstration
+## 🔩 Bonus Systems
 
-### Base Version (Mandatory Part)
+### Enemy spawning
 
-![Image](https://github.com/user-attachments/assets/458f38c8-28ba-4d6c-9c3e-b4c967e8ac99)
+Enemies are distributed proportionally across the map — the algorithm counts all walkable tiles (`0`) and assigns a random valid spawn position to each enemy. Larger maps get more enemies, keeping difficulty balanced regardless of map size.
 
-*Classic raycasting with textured walls, floor/ceiling colors, and smooth movement.*
+### Door placement
 
-### Bonus Version
+Doors replace wall tiles (`1`) and are validated against two patterns to ensure they are always accessible:
 
-![Image](https://github.com/user-attachments/assets/e24f80b1-c9ee-4f0d-aa48-575c04700e3b)
+```
+# Horizontal corridor    # Vertical corridor
+  1 0 1                    1 1 1
+  1 D 1                    0 D 0
+  1 0 1                    1 1 1
+```
 
-*Enhanced with wall collisions, minimap, animated sprites, doors, and mouse rotation.*
+No two doors can be placed adjacent to each other, and every door must connect two walkable spaces.
 
 ---
 
-## Bonus Features
+## 📁 Project Structure
 
-All bonus features have been implemented:
+<details>
+<summary><strong>Base version</strong></summary>
 
-- ✅ **Wall collisions**
-- ✅ **Minimap system**
-- ✅ **Doors** (can open and close)
-- ✅ **Animated sprites**
-- ✅ **Mouse rotation**
-
-### Enemy Placement System
-
-The enemy placement algorithm analyzes the map structure to determine valid spawn locations:
-
-- **Dynamic Spawning**: The system counts all walkable spaces (represented by `0`) in the map
-- **Proportional Distribution**: Enemies are randomly placed based on the total number of walkable tiles
-- **Random Positioning**: Each enemy is assigned to a random valid position to ensure varied gameplay experiences
-
-This approach ensures that larger maps have more enemies while maintaining balanced difficulty across different map sizes.
-
-### Door Placement System
-
-Doors are strategically placed using a sophisticated validation algorithm:
-
-- **Wall-Based Placement**: Doors can only replace wall tiles (represented by `1`)
-- **Adjacency Validation**: The system prevents two doors from being placed next to each other
-- **Accessibility Check**: Each door must have a valid configuration where it connects walkable spaces
-
-Valid door configurations must follow this pattern:
-```
-1 0 1
-1 D 1
-1 0 1
-```
-or
-```
-1 1 1
-0 D 0
-1 1 1
-```
-
-Where `D` represents the door, `1` represents walls, and `0` represents walkable space. This ensures that all doors are accessible and serve a functional purpose in the maze layout.
-
----
-
-## Project Structure
-
-Base Version (Mandatory Part)
 ```
 cub3d/
-├── assets/               # Textures
+├── assets/
 │   └── textures/
-│
-├── include/              # Header file (.h)
+├── include/
 │   └── cub3d.h
-│
-├── libs/                 # Libraries used
-|   ├── get_next_line/
+├── libs/
+│   ├── get_next_line/
 │   └── libft/
-│
-├── maps/                 # Maps
-|
-├── minilibx-linux/       # MiniLibX library
-|
-├── src/                  # Source files (.c)
-│   ├── events/           # Key handling and player movement
-│   ├── init/             # Game and texture initialization
-│   ├── parse/            # Map parsing and validation logic
-│   ├── render/           # Raycasting engine and wall drawing
-│   ├── utils/            # Helper functions and error handling
-│   └── main.c            # Program entry point
-│
+├── maps/
+├── minilibx-linux/
+├── src/
+│   ├── events/       # Key handling and player movement
+│   ├── init/         # Game and texture initialisation
+│   ├── parse/        # Map parsing and validation
+│   ├── render/       # Raycasting engine and wall rendering
+│   ├── utils/        # Helpers and error handling
+│   └── main.c
 └── Makefile
 ```
 
-Bonus Version
+</details>
+
+<details>
+<summary><strong>Bonus version</strong></summary>
+
 ```
 cub3d/
-├── assets/               # Textures
+├── assets/
 │   ├── door_textures/
 │   ├── enemies/
 │   ├── gun_textures/
 │   └── textures/
-│
-├── include/              # Header file (.h)
+├── include/
 │   └── cub3d_bonus.h
-│
-├── libs/                 # Libraries used
-|   ├── get_next_line/
+├── libs/
+│   ├── get_next_line/
 │   └── libft/
-│
-├── maps/                 # Maps
-|
-├── minilibx-linux/       # MiniLibX library
-│
-├── src_bonus/            # Bonus source files (.c)
-│   ├── door_system/      # Door initialization, placement, and interaction logic
-│   ├── enemy_system/     # AI logic, collision, line of sight, and enemy rendering
-│   ├── events/           # Inputs (Mouse/Keyboard), movement, and weapon animations
-│   ├── init/             # Game state and texture loading
-│   ├── parse/            # Deep validation of .cub files and map layouts
-│   ├── render/           # Raycasting engine, walls, minimap, and weapon rendering
-│   ├── utils/            # Memory management (free), colors, and pixel manipulation
-│   ├── main.c            # Main program loop
-│   └── main_aux.c        # Auxiliary main functions
-│
+├── maps_bonus/
+├── minilibx-linux/
+├── src_bonus/
+│   ├── door_system/  # Door init, placement, and interaction
+│   ├── enemy_system/ # AI, collision, line of sight, rendering
+│   ├── events/       # Mouse/keyboard input and weapon animations
+│   ├── init/         # Game state and texture loading
+│   ├── parse/        # Deep .cub file and map validation
+│   ├── render/       # Raycasting, minimap, and weapon rendering
+│   ├── utils/        # Memory, colors, and pixel helpers
+│   ├── main.c
+│   └── main_aux.c
 └── Makefile
 ```
 
----
-
-## Resources
-
-### Documentation & References
-
-- [Lode's Raycasting Tutorial](https://lodev.org/cgtutor/raycasting.html) - Comprehensive guide to raycasting
-- [Wolfenstein 3D Source Code](https://github.com/id-Software/wolf3d) - Original game source
-- [MiniLibX Documentation](https://harm-smits.github.io/42docs/libs/minilibx) - MiniLibX usage guide
-- [Ray-Casting Tutorial by Permadi](https://permadi.com/1996/05/ray-casting-tutorial-table-of-contents/) - Mathematical foundations
+</details>
 
 ---
 
-## Memory Management
+## 🚀 Installation & Usage
 
-The project has been tested with **Valgrind** to ensure no memory leaks:
+### 1. Install MiniLibX
+
+```bash
+git clone https://github.com/42Paris/minilibx-linux.git
+mv minilibx-linux 42cub3d/
+```
+
+### 2. Compile & Run
+
+```bash
+cd 42cub3d
+
+# Base version
+make
+./cub3D maps/example.cub
+
+# Bonus version
+make bonus
+./cub3D maps_bonus/example_bonus.cub
+```
+
+### 3. Memory check
+
 ```bash
 valgrind --leak-check=full --show-leak-kinds=all ./cub3D maps/example.cub
 ```
 
 ---
 
-## Norminette Compliance
+## 📚 References
 
-All code follows the **42 Norminette** coding standards:
-```bash
-norminette src include
-```
-
----
-
-## Authors
-
-- [**andrade950**](https://github.com/andrade950)
-- [**g0nca**](https://github.com/g0nca)
+- [Lode's Raycasting Tutorial](https://lodev.org/cgtutor/raycasting.html) — comprehensive raycasting guide
+- [Permadi's Ray-Casting Tutorial](https://permadi.com/1996/05/ray-casting-tutorial-table-of-contents/) — mathematical foundations
+- [MiniLibX Docs](https://harm-smits.github.io/42docs/libs/minilibx) — MiniLibX usage guide
+- [Wolfenstein 3D Source](https://github.com/id-Software/wolf3d) — original game reference
 
 ---
