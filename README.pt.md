@@ -1,231 +1,190 @@
-# cub3D
+<div align="center">
+
+# 🎮 cub3D
+
+**Um motor de raycasting inspirado no Wolfenstein, escrito em C**
+
+[![Linguagem](https://img.shields.io/badge/Linguagem-C-blue.svg)](https://en.wikipedia.org/wiki/C_(programming_language))
+[![Gráficos](https://img.shields.io/badge/Gráficos-MiniLibX-orange.svg)](#instalação)
+[![Técnica](https://img.shields.io/badge/Renderização-Raycasting-red.svg)](#como-funciona)
+[![Norm](https://img.shields.io/badge/42-Norminette-brightgreen.svg)](#)
 
 [Read in English](README.md)
 
-## Descrição
+*Desenvolvido por [andrade950](https://github.com/andrade950) & [g0nca](https://github.com/g0nca)*
 
-**cub3D** é um projeto gráfico 3D inspirado no lendário **Wolfenstein 3D**, o primeiro First Person Shooter (FPS) da história. Usando a técnica de **raycasting**, este projeto renderiza um labirinto 3D realista a partir de uma perspetiva em primeira pessoa baseado num mapa 2D.
-
-O objetivo é explorar os fundamentos de computação gráfica, compreender algoritmos de raycasting e criar um ambiente 3D interativo usando a biblioteca **MiniLibX** em C.
-
-### Funcionalidades Principais
-
-- **Renderização 3D** usando princípios de raycasting
-- **Mapeamento de texturas** para paredes (Norte, Sul, Este, Oeste)
-- **Cores personalizáveis** para chão e teto
-- **Movimento do jogador** e rotação da câmara
-- **Análise e validação de mapas** a partir de ficheiros `.cub`
-- **Gestão suave de janelas** e tratamento de eventos
+</div>
 
 ---
 
-## Instruções
+## 📌 Visão Geral
 
-### Pré-requisitos
+`cub3D` renderiza um labirinto 3D navegável em primeira pessoa usando a técnica de **raycasting** — o mesmo método por trás do Wolfenstein 3D (1992). Um mapa 2D em grelha é projetado num mundo 3D com texturas em tempo real, usando apenas a biblioteca **MiniLibX** em C.
 
-Antes de compilar o projeto, é necessário instalar a biblioteca **MiniLibX**:
-```bash
-# Clonar o repositório MiniLibX
-git clone https://github.com/42Paris/minilibx-linux.git minilibx-linux
+---
 
-# Mover para a pasta principal
-mv minilibx-linux 42cub3d/
-```
+## 🎬 Demonstração
 
-### Compilação
-```bash
-# Navegar para a pasta do projeto
-cd 42cub3d
+### Versão base
+![Versão base](https://github.com/user-attachments/assets/458f38c8-28ba-4d6c-9c3e-b4c967e8ac99)
 
-# Compilar o jogo base
-make
+### Versão bónus
+![Versão bónus](https://github.com/user-attachments/assets/e24f80b1-c9ee-4f0d-aa48-575c04700e3b)
 
-# Executar o jogo com um mapa
-./cub3D maps/example.cub
+---
 
-# Compilar com funcionalidades bónus
-make bonus
+## ⚙️ Funcionalidades
 
-# Executar a versão bónus
-./cub3D maps_bonus/example_bonus.cub
-```
+### Base
+- Motor 3D de raycasting
+- Paredes texturizadas — faces Norte, Sul, Este, Oeste
+- Cores configuráveis de chão e teto
+- Movimento do jogador e rotação de câmara
+- Parsing e validação de mapas a partir de ficheiros `.cub`
 
-### Controlos
+### Bónus
+- ✅ Colisões com paredes
+- ✅ Minimapa
+- ✅ Sprites animados
+- ✅ Portas (abrem e fecham com **E**)
+- ✅ Rotação de câmara com rato
+- ✅ Arma com animação de disparo (**Espaço**)
+- ✅ Sistema de inimigos com spawn dinâmico
+
+---
+
+## 🕹️ Controlos
 
 | Tecla | Ação |
 |-------|------|
-| **W** | Mover para frente |
-| **A** | Mover para a esquerda |
-| **S** | Mover para trás |
-| **D** | Mover para a direita |
-| **Seta Esquerda** | Rodar câmara para a esquerda |
-| **Seta Direita** | Rodar câmara para a direita |
-| **ESC** | Sair do jogo |
-| **Rato** (bónus) | Rodar câmara |
-| **E** (bónus) | Abrir/Fechar porte |
-| **Espaço** (bónus) | Disparar arma |
+| `W` `A` `S` `D` | Mover |
+| `←` `→` | Rodar câmara |
+| `Rato` *(bónus)* | Rodar câmara |
+| `E` *(bónus)* | Abrir / Fechar porta |
+| `Espaço` *(bónus)* | Disparar |
+| `ESC` | Sair |
 
 ---
 
-## Demonstração
+## 🔩 Sistemas Bónus
 
-### Versão Base (Parte Obrigatória)
+### Spawn de inimigos
 
-![Image](https://github.com/user-attachments/assets/458f38c8-28ba-4d6c-9c3e-b4c967e8ac99)
+Os inimigos são distribuídos proporcionalmente pelo mapa — o algoritmo conta todos os tiles transitáveis (`0`) e atribui uma posição válida aleatória a cada inimigo. Mapas maiores recebem mais inimigos, mantendo a dificuldade equilibrada independentemente do tamanho.
 
-*Raycasting clássico com paredes texturizadas, cores de chão/teto e movimento suave.*
+### Colocação de portas
 
-### Versão Bónus
+As portas substituem blocos de parede (`1`) e são validadas contra dois padrões para garantir que estão sempre acessíveis:
 
-![Image](https://github.com/user-attachments/assets/e24f80b1-c9ee-4f0d-aa48-575c04700e3b)
+```
+# Corredor horizontal    # Corredor vertical
+  1 0 1                    1 1 1
+  1 P 1                    0 P 0
+  1 0 1                    1 1 1
+```
 
-*Melhorado com colisões de parede, minimapa, sprites animados, portas e rotação com rato.*
+Nenhuma porta pode ser colocada adjacente a outra, e cada porta tem de conectar dois espaços transitáveis.
 
 ---
 
-## Funcionalidades Bónus
+## 📁 Estrutura do Projeto
 
-Todas as funcionalidades bónus foram implementadas:
+<details>
+<summary><strong>Versão base</strong></summary>
 
-- ✅ **Colisões com paredes**
-- ✅ **Sistema de minimapa**
-- ✅ **Portas** (podem abrir e fechar)
-- ✅ **Sprites animados**
-- ✅ **Rotação com rato**
-
-### Sistema de Colocação de Inimigos
-
-O algoritmo de colocação de inimigos analisa a estrutura do mapa para determinar localizações válidas de spawn:
-
-- **Spawn Dinâmico**: O sistema conta todos os espaços transitáveis (representados por `0`) no mapa
-- **Distribuição Proporcional**: Os inimigos são colocados aleatoriamente com base no número total de espaços transitáveis
-- **Posicionamento Aleatório**: Cada inimigo é atribuído a uma posição válida aleatória para garantir experiências de jogo variadas
-
-Esta abordagem garante que mapas maiores têm mais inimigos, mantendo a dificuldade equilibrada em diferentes tamanhos de mapa.
-
-### Sistema de Colocação de Portas
-
-As portas são estrategicamente colocadas usando um algoritmo sofisticado de validação:
-
-- **Colocação Baseada em Paredes**: As portas só podem substituir blocos de parede (representados por `1`)
-- **Validação de Adjacência**: O sistema previne que duas portas sejam colocadas uma ao lado da outra
-- **Verificação de Acessibilidade**: Cada porta deve ter uma configuração válida onde conecta espaços transitáveis
-
-Configurações válidas de portas devem seguir este padrão:
-```
-1 0 1
-1 P 1
-1 0 1
-```
-ou
-```
-1 1 1
-0 P 0
-1 1 1
-```
-
-Onde `P` representa a porta, `1` representa paredes e `0` representa espaço transitável. Isto garante que todas as portas são acessíveis e servem um propósito funcional no layout do labirinto.
-
----
-
-## Estrutura do Projeto
-
-Versão Base (Parte Obrigatória)
 ```
 cub3d/
-├── assets/               # Texturas
+├── assets/
 │   └── textures/
-│
-├── include/              # Ficheiro de cabeçalho (.h)
+├── include/
 │   └── cub3d.h
-│
-├── libs/                 # Bibliotecas utilizadas
-|   ├── get_next_line/
+├── libs/
+│   ├── get_next_line/
 │   └── libft/
-│
-├── maps/                 # Mapas
-|
-├── minilibx-linux/       # Biblioteca MiniLibX
-|
-├── src/                  # Ficheiros fonte (.c)
-│   ├── events/           # Gestão de teclas e movimento do jogador
-│   ├── init/             # Inicialização do jogo e texturas
-│   ├── parse/            # Análise e validação do mapa
-│   ├── render/           # Motor de raycasting e desenho de paredes
-│   ├── utils/            # Funções auxiliares e gestão de erros
-│   └── main.c            # Ponto de entrada do programa
-│
+├── maps/
+├── minilibx-linux/
+├── src/
+│   ├── events/       # Gestão de teclas e movimento do jogador
+│   ├── init/         # Inicialização do jogo e texturas
+│   ├── parse/        # Parsing e validação do mapa
+│   ├── render/       # Motor de raycasting e renderização de paredes
+│   ├── utils/        # Funções auxiliares e gestão de erros
+│   └── main.c
 └── Makefile
 ```
 
-Versão Bónus
+</details>
+
+<details>
+<summary><strong>Versão bónus</strong></summary>
+
 ```
 cub3d/
-├── assets/               # Texturas
+├── assets/
 │   ├── door_textures/
 │   ├── enemies/
 │   ├── gun_textures/
 │   └── textures/
-│
-├── include/              # Ficheiro de cabeçalho (.h)
+├── include/
 │   └── cub3d_bonus.h
-│
-├── libs/                 # Bibliotecas utilizadas
-|   ├── get_next_line/
+├── libs/
+│   ├── get_next_line/
 │   └── libft/
-│
-├── maps/                 # Mapas
-|
-├── minilibx-linux/       # Biblioteca MiniLibX
-│
-├── src_bonus/            # Ficheiros fonte do bónus (.c)
-│   ├── door_system/      # Inicialização, posicionamento e lógica de interação das portas
-│   ├── enemy_system/     # IA, colisão, linha de visão e renderização de inimigos
-│   ├── events/           # Entradas (Rato/Teclado), movimento e animações de armas
-│   ├── init/             # Estado do jogo e carregamento de texturas
-│   ├── parse/            # Validação profunda de ficheiros .cub e layouts de mapas
-│   ├── render/           # Motor de raycasting, paredes, minimapa e renderização de armas
-│   ├── utils/            # Gestão de memória (free), cores e manipulação de píxeis
-│   ├── main.c            # Ciclo principal do programa
-│   └── main_aux.c        # Funções auxiliares do main
-│
+├── maps_bonus/
+├── minilibx-linux/
+├── src_bonus/
+│   ├── door_system/  # Inicialização, colocação e interação de portas
+│   ├── enemy_system/ # IA, colisão, linha de visão e renderização
+│   ├── events/       # Input rato/teclado e animações de arma
+│   ├── init/         # Estado do jogo e carregamento de texturas
+│   ├── parse/        # Validação profunda de ficheiros .cub e mapas
+│   ├── render/       # Raycasting, minimapa e renderização de arma
+│   ├── utils/        # Memória, cores e manipulação de píxeis
+│   ├── main.c
+│   └── main_aux.c
 └── Makefile
 ```
 
----
-
-## Recursos
-
-### Documentação e Referências
-
-- [Tutorial de Raycasting do Lode](https://lodev.org/cgtutor/raycasting.html) - Guia completo sobre raycasting
-- [Código Fonte do Wolfenstein 3D](https://github.com/id-Software/wolf3d) - Código fonte do jogo original
-- [Documentação MiniLibX](https://harm-smits.github.io/42docs/libs/minilibx) - Guia de uso da MiniLibX
-- [Tutorial de Ray-Casting por Permadi](https://permadi.com/1996/05/ray-casting-tutorial-table-of-contents/) - Fundamentos matemáticos
+</details>
 
 ---
 
-## Gestão de Memória
+## 🚀 Instalação e Utilização
 
-O projeto foi testado com **Valgrind** para garantir que não há fugas de memória:
+### 1. Instalar MiniLibX
+
+```bash
+git clone https://github.com/42Paris/minilibx-linux.git
+mv minilibx-linux 42cub3d/
+```
+
+### 2. Compilar e Executar
+
+```bash
+cd 42cub3d
+
+# Versão base
+make
+./cub3D maps/example.cub
+
+# Versão bónus
+make bonus
+./cub3D maps_bonus/example_bonus.cub
+```
+
+### 3. Verificação de memória
+
 ```bash
 valgrind --leak-check=full --show-leak-kinds=all ./cub3D maps/example.cub
 ```
 
 ---
 
-## Conformidade com Norminette
+## 📚 Referências
 
-Todo o código segue os padrões de codificação da **42 Norminette**:
-```bash
-norminette src include
-```
-
----
-
-## Autores
-
-- [**andrade950**](https://github.com/andrade950)
-- [**g0nca**](https://github.com/g0nca)
+- [Tutorial de Raycasting do Lode](https://lodev.org/cgtutor/raycasting.html) — guia completo de raycasting
+- [Tutorial de Ray-Casting por Permadi](https://permadi.com/1996/05/ray-casting-tutorial-table-of-contents/) — fundamentos matemáticos
+- [Documentação MiniLibX](https://harm-smits.github.io/42docs/libs/minilibx) — guia de uso da MiniLibX
+- [Código Fonte do Wolfenstein 3D](https://github.com/id-Software/wolf3d) — referência do jogo original
 
 ---
